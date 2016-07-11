@@ -1,7 +1,9 @@
 package com.heinrichreimersoftware.materialintro.view.parallax;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.support.annotation.FloatRange;
 import android.util.AttributeSet;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.heinrichreimersoftware.materialintro.R;
+import com.nineoldandroids.view.ViewHelper;
 
 public class ParallaxLinearLayout extends LinearLayout implements Parallaxable {
 
@@ -23,6 +26,7 @@ public class ParallaxLinearLayout extends LinearLayout implements Parallaxable {
         super(context, attrs);
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public ParallaxLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
@@ -54,7 +58,7 @@ public class ParallaxLinearLayout extends LinearLayout implements Parallaxable {
             View child = getChildAt(i);
             ParallaxLinearLayout.LayoutParams p = (LayoutParams) child.getLayoutParams();
             if (p.parallaxFactor == 0) continue;
-            child.setTranslationX(getWidth() * -offset * p.parallaxFactor);
+            ViewHelper.setTranslationX(child, getWidth() * -offset * p.parallaxFactor);
         }
     }
 

@@ -20,8 +20,12 @@ import android.content.Context;
 import android.os.Build;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
 import com.heinrichreimersoftware.materialintro.R;
@@ -34,6 +38,7 @@ public class AnimUtils {
     private AnimUtils() { }
 
     private static Interpolator fastOutSlowIn;
+    private static Interpolator accelerateDecelerate;
 
     public static Interpolator getFastOutSlowInInterpolator(Context context) {
         if (fastOutSlowIn == null) {
@@ -46,6 +51,41 @@ public class AnimUtils {
             }
         }
         return fastOutSlowIn;
+    }
+
+    public static Interpolator getAccelerateDecelerateInterpolator(Context context) {
+        if (accelerateDecelerate == null) {
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                accelerateDecelerate = AnimationUtils.loadInterpolator(context,
+                        android.R.interpolator.accelerate_decelerate);
+            }
+            else {
+                accelerateDecelerate = new AccelerateDecelerateInterpolator();
+            }
+        }
+        return accelerateDecelerate;
+    }
+
+    public static Animation getFadeInAnimation(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return AnimationUtils.loadAnimation(context, R.anim.fade_in);
+        } else {
+            AlphaAnimation anim = new AlphaAnimation(0, 1);
+            anim.setDuration(200);
+            anim.setInterpolator(new DecelerateInterpolator());
+            return anim;
+        }
+    }
+
+    public static Animation getFadeOutAnimation(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return AnimationUtils.loadAnimation(context, R.anim.fade_out);
+        } else {
+            AlphaAnimation anim = new AlphaAnimation(1, 0);
+            anim.setDuration(200);
+            anim.setInterpolator(new AccelerateInterpolator());
+            return anim;
+        }
     }
 
     public static void applyShakeAnimation(Context context, View view) {

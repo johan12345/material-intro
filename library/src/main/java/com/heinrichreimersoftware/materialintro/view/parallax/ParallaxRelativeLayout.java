@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.heinrichreimersoftware.materialintro.R;
+import com.nineoldandroids.view.ViewHelper;
 
 public class ParallaxRelativeLayout extends RelativeLayout implements Parallaxable {
 
@@ -54,7 +55,7 @@ public class ParallaxRelativeLayout extends RelativeLayout implements Parallaxab
             View child = getChildAt(i);
             ParallaxRelativeLayout.LayoutParams p = (LayoutParams) child.getLayoutParams();
             if (p.parallaxFactor == 0) continue;
-            child.setTranslationX(getWidth() * -offset * p.parallaxFactor);
+            ViewHelper.setTranslationX(child, getWidth() * -offset * p.parallaxFactor);
         }
     }
 

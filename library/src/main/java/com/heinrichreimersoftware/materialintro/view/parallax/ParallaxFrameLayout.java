@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.heinrichreimersoftware.materialintro.R;
+import com.nineoldandroids.view.ViewHelper;
 
 public class ParallaxFrameLayout extends FrameLayout implements Parallaxable {
 
@@ -54,7 +55,7 @@ public class ParallaxFrameLayout extends FrameLayout implements Parallaxable {
             View child = getChildAt(i);
             ParallaxFrameLayout.LayoutParams p = (LayoutParams) child.getLayoutParams();
             if (p.parallaxFactor == 0) continue;
-            child.setTranslationX(getWidth() * -offset * p.parallaxFactor);
+            ViewHelper.setTranslationX(child, getWidth() * -offset * p.parallaxFactor);
         }
     }
 

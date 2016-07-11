@@ -16,9 +16,6 @@
 
 package com.heinrichreimersoftware.materialintro.view;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
@@ -35,14 +32,16 @@ import android.view.animation.Interpolator;
 
 import com.heinrichreimersoftware.materialintro.R;
 import com.heinrichreimersoftware.materialintro.util.AnimUtils;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorListenerAdapter;
+import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.Arrays;
 
 /**
  * An ink inspired widget for indicating pages in a {@link ViewPager}.
  */
-public class InkPageIndicator extends View implements ViewPager.OnPageChangeListener,
-        View.OnAttachStateChangeListener {
+public class InkPageIndicator extends View implements ViewPager.OnPageChangeListener {
 
     // defaults
     private static final int DEFAULT_DOT_SIZE = 8;                      // dp
@@ -157,8 +156,6 @@ public class InkPageIndicator extends View implements ViewPager.OnPageChangeList
         unselectedDotLeftPath = new Path();
         unselectedDotRightPath = new Path();
         rectF = new RectF();
-
-        addOnAttachStateChangeListener(this);
     }
 
     @ColorInt
@@ -339,12 +336,14 @@ public class InkPageIndicator extends View implements ViewPager.OnPageChangeList
     }
 
     @Override
-    public void onViewAttachedToWindow(View view) {
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
         isAttachedToWindow = true;
     }
 
     @Override
-    public void onViewDetachedFromWindow(View view) {
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
         isAttachedToWindow = false;
     }
 
