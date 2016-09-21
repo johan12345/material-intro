@@ -183,7 +183,7 @@ public class IntroActivity extends AppCompatActivity {
         updateTaskDescription();
         updateButtonNextDrawable();
         updateButtonBackDrawable();
-        updateViewPositions();
+        updateScrollPositions();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             frame.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -779,7 +779,7 @@ public class IntroActivity extends AppCompatActivity {
 
         if (realPosition < adapter.getCount() - 2) {
             //Reset
-            buttonNext.setTranslationY(0);
+            ViewHelper.setTranslationY(buttonNext, 0);
         }
         else if (realPosition < adapter.getCount() - 1) {
             //Reset finish button, hide next icon
