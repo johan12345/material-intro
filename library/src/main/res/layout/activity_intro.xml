@@ -61,8 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/mi_content_description_back"
-            android:background="@drawable/button_background"/>
+            android:text="@string/mi_content_description_skip" />
 
         <com.heinrichreimersoftware.materialintro.view.InkPageIndicator
             android:id="@id/mi_pager_indicator"
@@ -79,8 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/mi_content_description_next"
-            android:background="@drawable/button_background"/>
+            android:text="@string/mi_content_description_next" />
 
     </LinearLayout>
 
