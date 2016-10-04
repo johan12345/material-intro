@@ -110,8 +110,8 @@ public class IntroActivity extends AppCompatActivity {
     private FadeableViewPager pager;
     private TextSwitcher buttonCta;
     private InkPageIndicator pagerIndicator;
-    private ImageButton buttonNext;
-    private ImageButton buttonBack;
+    private Button buttonNext;
+    private Button buttonBack;
     private SlideAdapter adapter;
     private IntroPageChangeListener listener = new IntroPageChangeListener();
     private int position = 0;
@@ -282,8 +282,8 @@ public class IntroActivity extends AppCompatActivity {
         frame = (LinearLayout) findViewById(R.id.mi_frame);
         pager = (FadeableViewPager) findViewById(R.id.mi_pager);
         pagerIndicator = (InkPageIndicator) findViewById(R.id.mi_pager_indicator);
-        buttonNext = (ImageButton) findViewById(R.id.mi_button_next);
-        buttonBack = (ImageButton) findViewById(R.id.mi_button_skip);
+        buttonNext = (Button) findViewById(R.id.mi_button_next);
+        buttonBack = (Button) findViewById(R.id.mi_button_skip);
 
         buttonCta = (TextSwitcher) findViewById(R.id.mi_button_cta);
         if (buttonCta != null) {
@@ -621,8 +621,8 @@ public class IntroActivity extends AppCompatActivity {
             iconColor = ContextCompat.getColor(this, R.color.mi_icon_color_dark);
         }
         pagerIndicator.setCurrentPageIndicatorColor(iconColor);
-        DrawableCompat.setTint(buttonNext.getDrawable(), iconColor);
-        DrawableCompat.setTint(buttonBack.getDrawable(), iconColor);
+        buttonNext.setTextColor(iconColor);
+        buttonBack.setTextColor(iconColor);
 
         @ColorInt
         int textColorButtonCta = buttonCtaTintMode == BUTTON_CTA_TINT_MODE_TEXT ?
@@ -865,39 +865,11 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     private void updateButtonNextDrawable() {
-        float realPosition = position + positionOffset;
-        float offset = 0;
 
-        if (buttonNextFunction == BUTTON_NEXT_FUNCTION_NEXT_FINISH) {
-            if (realPosition >= adapter.getCount() - 1) {
-                offset = 1;
-            }
-            else if (realPosition >= adapter.getCount() - 2) {
-                offset = positionOffset;
-            }
-        }
-
-        if (offset <= 0) {
-            buttonNext.setImageResource(R.drawable.ic_next);
-            buttonNext.getDrawable().setAlpha(0xFF);
-        } else {
-            buttonNext.setImageResource(R.drawable.ic_next_finish);
-            if (buttonNext.getDrawable() != null && buttonNext.getDrawable() instanceof LayerDrawable) {
-                LayerDrawable drawable = (LayerDrawable) buttonNext.getDrawable();
-                drawable.getDrawable(0).setAlpha((int) (0xFF * (1 - offset)));
-                drawable.getDrawable(1).setAlpha((int) (0xFF * offset));
-            } else {
-                buttonNext.setImageResource(offset > 0 ? R.drawable.ic_finish : R.drawable.ic_next);
-            }
-        }
     }
 
     private void updateButtonBackDrawable() {
-        if (buttonBackFunction == BUTTON_BACK_FUNCTION_SKIP) {
-            buttonBack.setImageResource(R.drawable.ic_skip);
-        } else {
-            buttonBack.setImageResource(R.drawable.ic_previous);
-        }
+
     }
 
     @SuppressWarnings("unused")
