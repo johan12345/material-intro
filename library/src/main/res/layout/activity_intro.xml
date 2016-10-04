@@ -53,23 +53,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="bottom">
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@id/mi_button_skip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/mi_content_description_skip" />
+            android:text="@string/mi_content_description_skip"
+            style="@style/Widget.AppCompat.Button.Borderless" />
 
         <com.heinrichreimersoftware.materialintro.view.InkPageIndicator
             android:id="@id/mi_pager_indicator"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginTop="@dimen/mi_baseline_half"
-            android:layout_marginBottom="@dimen/mi_margin_bottom_pager_indicator"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="27dp"
             app:dotDiameter="10dp"
             app:dotGap="@dimen/mi_baseline_half"/>
 
@@ -78,7 +78,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/mi_content_description_next" />
+            android:text="@string/mi_content_description_next"
+            style="@style/Widget.AppCompat.Button.Borderless" />
 
     </LinearLayout>
 
